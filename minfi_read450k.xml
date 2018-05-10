@@ -4,19 +4,17 @@
         <requirement type="package" version="1.24.0">bioconductor-minfi</requirement>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
-        Rscript ${__tool_directory__}/minfi_read450k.R "$input1" "$input2" "$output1"
+        Rscript ${__tool_directory__}/minfi_read450k.R "$input1" "$output1"
     ]]></command>
     <inputs>
-        <param type="data" name="input1" format="idat" />
-        <param type="data" name="input2" format="idat" />
+        <param name="input1" type="text" value="" label="path to idat dir" help="Local path to directory with raw idat data"  />
     </inputs>
     <outputs>
         <data name="output1" format="rdata" />
     </outputs>
     <tests>
         <test>
-            <param name="input1" value="5723646052_R04C01_Grn.idat"/>
-            <param name="input2" value="5723646052_R04C01_Red.idat"/>
+            <param name="input1" value="/home/ubuntu/minfi_read450k/idat"/>
             <output name="output1" file="RGSet.rdata"/>
         </test>
     </tests>

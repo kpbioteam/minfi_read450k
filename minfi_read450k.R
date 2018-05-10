@@ -2,11 +2,11 @@ require("minfi", quietly = TRUE)
 
 args <- commandArgs(trailingOnly = TRUE)
 
-input1 = args[1]
-input2 = args[2]
-output = args[3]
+input = args[1]
+output = args[2]
 
-files <- as.list(input1,input2)
-RGSet <- read.metharray(files)
+files<-list.files(input,full.names=TRUE,pattern="_Grn")
 
-save(RGSet, file = output)
+targets <- read.metharray(files)
+
+save(targets, file = output)
