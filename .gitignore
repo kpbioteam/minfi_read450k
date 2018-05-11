@@ -1,2 +1,6 @@
 **/.venv
 **/.planemo.yml
+**/*.Rproj
+.Rproj.user
+**/*.html
+**/*.json
