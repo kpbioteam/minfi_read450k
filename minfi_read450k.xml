@@ -25,11 +25,11 @@
         ]]> </configfile>
         </configfiles>
         <inputs>
-        <param type="data" name="files_red" multiple="true" format="idat" />
-          <param type="data" name="files_grn" multiple="true" format="idat" />
+        <param type="data" name="files_red" multiple="true" format="idat" label="Red .IDAT files"/>
+          <param type="data" name="files_grn" multiple="true" format="idat" label="Green .IDAT files" />
             </inputs>
             <outputs>
-            <data name="output1" format="rdata" />
+            <data name="output1" format="rdata" label="RGChannelSet"/>
               </outputs>
               <tests>
               <test>
