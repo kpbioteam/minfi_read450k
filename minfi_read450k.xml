@@ -25,6 +25,7 @@
         #end for
         out <- read.metharray(files)
         sampleNames(out)<-file_names
+        colnames(out)<-file_names
         save(out, file = '$output1')
       
         ]]> </configfile>
