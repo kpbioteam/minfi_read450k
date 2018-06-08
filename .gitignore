@@ -1,3 +1,10 @@
 **/.venv
 **/.planemo.yml
+<<<<<<< HEAD
 .Rproj.user
+=======
+**/*.Rproj
+.Rproj.user
+**/*.html
+**/*.json
+>>>>>>> 75b6c06ec39c2d8bfc69903536f3cafaae9cb509

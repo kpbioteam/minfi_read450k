@@ -1,27 +1,47 @@
-<tool id="minfi_read450k" name="minfi_read450k" version="0.1.0">
-    <description>load .IDAT files into RGSet</description>
-    <requirements>
-        <requirement type="package" version="1.24.0">bioconductor-minfi</requirement>
+<tool id="minfi_read450k" name="minfi_read450k" version="2.1.0">
+  <description>load .IDAT files</description>
+  <requirements>
+  <requirement type="package" version="1.24.0">bioconductor-minfi</requirement>
     </requirements>
     <command detect_errors="exit_code"><![CDATA[
-        Rscript ${__tool_directory__}/minfi_read450k.R "$input1" "$output1"
-    ]]></command>
-    <inputs>
-        <param name="input1" type="text" value="" label="path to idat dir" help="Local path to directory with raw idat data"  />
-    </inputs>
-    <outputs>
-        <data name="output1" format="rdata" />
-    </outputs>
-    <tests>
-        <test>
-            <param name="input1" value="/home/ubuntu/minfi_read450k/idat"/>
-            <output name="output1" file="RGSet.rdata"/>
-        </test>
-    </tests>
-    <help><![CDATA[
-        This tool Reads an entire methylation array experiment into RGSet class
-    ]]></help>
-    <citations>
-        <citation type="doi">10.1093/bioinformatics/btu049</citation>
-    </citations>
-</tool>
+      #for $counter, $file in enumerate($files_red):
+      ln -s $file ./${counter+1}_Red.idat &&
+        #end for
+        #for $counter, $file in enumerate($files_grn):
+        ln -s $file ./${counter+1}_Grn.idat &&
+        #end for
+        cat '$read_idat_script' &&
+        Rscript '$read_idat_script'
+      ]]></command>
+      <configfiles>
+      <configfile name="read_idat_script"><![CDATA[
+        require("minfi", quietly = TRUE)
+        files<-list()
+        #for $counter, $input in enumerate($files_red):
+        files['${counter+1}'] <- '${counter+1}'
+        #end for
+        out <- read.metharray(files)
+        save(out, file = '$output1')
+        ]]> </configfile>
+        </configfiles>
+        <inputs>
+        <param type="data" name="files_red" multiple="true" format="idat" label="Red .IDAT files"/>
+          <param type="data" name="files_grn" multiple="true" format="idat" label="Green .IDAT files" />
+            </inputs>
+            <outputs>
+            <data name="output1" format="rdata" label="RGChannelSet"/>
+              </outputs>
+              <tests>
+              <test>
+              <param name="files_red" value="5723646052_R04C01_Red.idat" />
+                <param name="files_grn" value="5723646052_R04C01_Grn.idat" />
+                  <output name="output1" file="idatFile.rdata"/>
+                    </test>
+                    </tests>
+                    <help><![CDATA[
+                      This tool reads idat files]]></help>
+                    <citations>
+                    <citation type="doi">10.18129/B9.bioc.illuminaio</citation>
+                      </citations>
+                      </tool>
+                      

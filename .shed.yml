@@ -1,0 +1,6 @@
+categories: [Epigenetics]
+description: This tool Reads an entire methylation array experiment into RGSet class
+homepage_url: https://github.com/kpbioteam/minfi_read450k
+name: minfi_read450k
+owner: kpbioteam
+remote_repository_url: https://github.com/kpbioteam/minfi_read450k
