@@ -17,7 +17,8 @@
       <configfiles>
       <configfile name="read_idat_script"><![CDATA[
         require("minfi", quietly = TRUE)
-        files<- list()     
+        files <- list()     
+        file_names <- as.character(unlist(read.table("$names", sep=",")))
       #for $counter, $input in enumerate($files_red):
       files['${counter+1}'] <- '${counter+1}'
         #end for
@@ -30,6 +31,7 @@
         <inputs>
         <param type="data" name="files_red" multiple="true" format="idat" label="Red .IDAT files"/>
           <param type="data" name="files_grn" multiple="true" format="idat" label="Green .IDAT files" />
+          <param type="data" name="names" format="tabular" label="Sample Table"/>
             </inputs>
             <outputs>
             <data name="output1" format="rdata" label="RGChannelSet"/>
